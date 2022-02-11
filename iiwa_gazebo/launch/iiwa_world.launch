@@ -12,7 +12,8 @@
     <arg name="hardware_interface" default="PositionJointInterface"/>
     <arg name="robot_name" default="iiwa" />
     <arg name="model" default="iiwa7"/>
-    
+    <arg name="spawn_args" default="" doc="Extra args to spawn_gazebo_model" />
+
     <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(find iiwa_gazebo)/worlds/iiwa.world"/>
@@ -31,7 +32,7 @@
     
     <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-          args="-urdf -model iiwa -param robot_description"/>
+          args="-urdf -model iiwa -param robot_description $(arg spawn_args)"/>
     
     
     </launch>
